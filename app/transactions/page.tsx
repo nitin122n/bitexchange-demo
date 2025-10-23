@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
 import Card from '@/components/Card';
-import Table from '@/components/Table';
+import DataTable from '@/components/DataTable';
 import Modal from '@/components/Modal';
 
 interface Transaction {
@@ -436,7 +436,7 @@ export default function TransactionsPage() {
 
         {/* Transactions Table */}
         <Card>
-          <Table
+          <DataTable
             headers={['ID', 'User', 'Type', 'Method', 'Amount', 'Status', 'Fee', 'Date', 'Actions']}
             data={filteredTransactions.map(transaction => [
               <span key={`id-${transaction.id}`} className="font-mono text-sm">{transaction.id}</span>,

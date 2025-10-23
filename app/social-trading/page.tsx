@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
 import Card from '@/components/Card';
-import Table from '@/components/Table';
+import DataTable from '@/components/DataTable';
 
 interface Trader {
   id: string;
@@ -444,7 +444,7 @@ export default function SocialTradingPage() {
 
             {/* Traders Table */}
             <Card>
-              <Table
+              <DataTable
                 headers={['Trader', 'Status', 'Risk Level', 'Followers', 'Win Rate', 'Total Profit', 'Monthly Profit', 'Verified', 'Actions']}
                 data={filteredTraders.map(trader => [
                   <div key={trader.id} className="flex items-center space-x-3">
@@ -486,7 +486,7 @@ export default function SocialTradingPage() {
         {/* Live Trades Tab */}
         {activeTab === 'trades' && (
           <Card>
-            <Table
+            <DataTable
               headers={['Trader', 'Symbol', 'Type', 'Amount', 'Price', 'Profit', 'Followers', 'Time']}
               data={trades.map(trade => [
                 trade.traderName,
@@ -507,7 +507,7 @@ export default function SocialTradingPage() {
         {/* Copy Trades Tab */}
         {activeTab === 'copy-trades' && (
           <Card>
-            <Table
+            <DataTable
               headers={['Follower', 'Trader', 'Amount', 'Profit', 'Status', 'Time']}
               data={copyTrades.map(copyTrade => [
                 copyTrade.followerName,

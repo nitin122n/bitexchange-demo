@@ -208,8 +208,15 @@ export default function WalletPage() {
             <div className="space-y-6">
               <div className="text-center">
                 <QRViewer
-                  value={balances.find(b => b.symbol === selectedCoin)?.address || ''}
-                  size={200}
+                  qrCode={`data:image/svg+xml;base64,${btoa(`
+                    <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="200" height="200" fill="white"/>
+                      <text x="100" y="100" text-anchor="middle" font-family="monospace" font-size="12">
+                        ${balances.find(b => b.symbol === selectedCoin)?.address || ''}
+                      </text>
+                    </svg>
+                  `)}`}
+                  walletAddress={balances.find(b => b.symbol === selectedCoin)?.address || ''}
                 />
                 <p className="text-sm text-gray-600 mt-4">
                   Scan QR code or copy address below to deposit {selectedCoin}

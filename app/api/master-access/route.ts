@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { requireAuth, requirePermission } from '@/lib/auth';
-import { isValidEmail, validatePassword, hashPassword } from '@/lib/utils';
+import { isValidEmail, validatePassword } from '@/lib/utils';
+import { hashPassword } from '@/lib/auth';
 
 /**
  * GET /api/master-access

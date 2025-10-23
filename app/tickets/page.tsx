@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
 import Card from '@/components/Card';
-import Table from '@/components/Table';
+import DataTable from '@/components/DataTable';
 import Modal from '@/components/Modal';
 
 interface Ticket {
@@ -541,7 +541,7 @@ export default function TicketsPage() {
 
         {/* Tickets Table */}
         <Card>
-          <Table
+          <DataTable
             headers={['ID', 'Subject', 'User', 'Category', 'Priority', 'Status', 'Assigned To', 'Created', 'Actions']}
             data={filteredTickets.map(ticket => [
               <span key={`id-${ticket.id}`} className="font-mono text-sm">{ticket.id}</span>,

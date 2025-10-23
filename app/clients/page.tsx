@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
 import Card from '@/components/Card';
-import Table from '@/components/Table';
+import DataTable from '@/components/DataTable';
 import Modal from '@/components/Modal';
 
 interface Client {
@@ -254,7 +254,7 @@ export default function ClientsPage() {
 
         {/* Clients Table */}
         <Card>
-          <Table
+          <DataTable
             headers={['Name', 'Email', 'Status', 'Account Type', 'Balance', 'Country', 'Actions']}
             data={filteredClients.map(client => [
               <div key={client.id} className="flex items-center space-x-3">

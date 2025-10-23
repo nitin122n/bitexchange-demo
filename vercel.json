@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "builds": [{ "src": "next.config.js", "use": "@vercel/next" }],
   "framework": "nextjs",
   "env": {
     "DATABASE_URL": "file:./dev.db",

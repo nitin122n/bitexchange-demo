@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
 import Card from '@/components/Card';
-import Table from '@/components/Table';
+import DataTable from '@/components/DataTable';
 import Modal from '@/components/Modal';
 
 interface IBPartner {
@@ -374,7 +374,7 @@ export default function IBSectionPage() {
 
             {/* Partners Table */}
             <Card>
-              <Table
+              <DataTable
                 headers={['Partner', 'Company', 'Status', 'Tier', 'Commission Rate', 'Clients', 'Volume', 'Actions']}
                 data={filteredPartners.map(partner => [
                   <div key={partner.id} className="flex items-center space-x-3">
@@ -420,7 +420,7 @@ export default function IBSectionPage() {
         {/* Commissions Tab */}
         {activeTab === 'commissions' && (
           <Card>
-            <Table
+            <DataTable
               headers={['IB Partner', 'Client', 'Type', 'Amount', 'Rate', 'Commission', 'Date', 'Status']}
               data={commissions.map(commission => [
                 commission.ibName,

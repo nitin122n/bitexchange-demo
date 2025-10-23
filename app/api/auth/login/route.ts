@@ -51,8 +51,8 @@ export async function POST(request: NextRequest) {
     const token = generateToken({
       id: user.id,
       email: user.email,
-      role: user.role,
-      name: user.name,
+      role: user.role as 'SUPER_ADMIN' | 'ADMIN' | 'CO_ADMIN',
+      name: user.name || undefined,
     });
 
     // Return user data and token

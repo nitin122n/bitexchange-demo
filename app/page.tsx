@@ -96,11 +96,11 @@ export default function HomePage() {
           <div className="text-center">
             <h1 className="text-6xl lg:text-8xl font-bold mb-8">
               <span className="text-deep-slate-900">The Future of </span>
-              <span className="bg-gradient-to-r from-royal-purple-600 to-royal-purple-800 bg-clip-text text-transparent">Crypto </span>
+              <span className="bg-gradient-to-r from-royal-purple-600 to-royal-purple-800 bg-clip-text text-transparent">Forex </span>
               <span className="bg-gradient-to-r from-emerald-gold-600 to-luxury-gold-600 bg-clip-text text-transparent">Trading</span>
             </h1>
             <p className="text-xl lg:text-2xl text-deep-slate-600 mb-12 max-w-4xl mx-auto">
-              Empowering traders through high-quality tools, education, and support. Start your journey with bit_exchange today.
+              Empowering forex traders through high-quality tools, education, and support. Start your journey with bit_exchange today.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -319,18 +319,18 @@ export default function HomePage() {
                 </div>
                 <span className="text-xl font-bold gradient-text">bit_exchange</span>
               </div>
-              <p className="text-gray-300 mb-4">
-                The world&apos;s most advanced cryptocurrency exchange platform.
-              </p>
+                  <p className="text-gray-300 mb-4">
+                    The world&apos;s most advanced forex trading platform.
+                  </p>
             </div>
             
             <div>
               <h3 className="text-lg font-semibold mb-4">Products</h3>
               <ul className="space-y-2 text-gray-300">
-                <li><a href="#" className="hover:text-royal-purple-400 transition-colors">Spot Trading</a></li>
-                <li><a href="#" className="hover:text-royal-purple-400 transition-colors">Futures Trading</a></li>
+                <li><a href="#" className="hover:text-royal-purple-400 transition-colors">Forex Spot Trading</a></li>
+                <li><a href="#" className="hover:text-royal-purple-400 transition-colors">Forex Futures</a></li>
                 <li><a href="#" className="hover:text-royal-purple-400 transition-colors">Margin Trading</a></li>
-                <li><a href="#" className="hover:text-royal-purple-400 transition-colors">Staking</a></li>
+                <li><a href="#" className="hover:text-royal-purple-400 transition-colors">Currency Pairs</a></li>
               </ul>
             </div>
             

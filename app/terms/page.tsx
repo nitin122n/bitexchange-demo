@@ -19,7 +19,7 @@ export default function TermsPage() {
         <Card>
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Agreement to Terms</h2>
           <p className="text-gray-700 mb-4">
-            Welcome to bit_exchange. These Terms of Service ("Terms") govern your use of our cryptocurrency exchange platform and services (collectively, the "Service") operated by bit_exchange ("us," "we," or "our").
+            Welcome to bit_exchange. These Terms of Service (&quot;Terms&quot;) govern your use of our cryptocurrency exchange platform and services (collectively, the &quot;Service&quot;) operated by bit_exchange (&quot;us,&quot; &quot;we,&quot; or &quot;our&quot;).
           </p>
           <p className="text-gray-700">
             By accessing or using our Service, you agree to be bound by these Terms. If you disagree with any part of these terms, then you may not access the Service.
@@ -66,7 +66,7 @@ export default function TermsPage() {
             <li>Trading fees are displayed before order execution</li>
             <li>Withdrawal fees vary by cryptocurrency and network conditions</li>
             <li>Deposit fees may apply for certain payment methods</li>
-            <li>We reserve the right to modify fees with 30 days' notice</li>
+            <li>We reserve the right to modify fees with 30 days&apos; notice</li>
           </ul>
         </Card>
 
@@ -105,7 +105,7 @@ export default function TermsPage() {
             <li>Violating any applicable laws or regulations</li>
             <li>Attempting to hack or compromise our systems</li>
             <li>Providing false or misleading information</li>
-            <li>Interfering with other users' trading activities</li>
+            <li>Interfering with other users&apos; trading activities</li>
           </ul>
         </Card>
 
@@ -157,7 +157,7 @@ export default function TermsPage() {
             To the maximum extent permitted by law:
           </p>
           <ul className="list-disc list-inside text-gray-700 mb-6 space-y-2">
-            <li>We provide the Service "as is" without warranties</li>
+            <li>We provide the Service &quot;as is&quot; without warranties</li>
             <li>We are not liable for indirect, incidental, or consequential damages</li>
             <li>Our total liability is limited to the fees you paid us in the 12 months preceding the claim</li>
             <li>We are not responsible for third-party actions or services</li>

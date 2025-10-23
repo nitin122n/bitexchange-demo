@@ -19,7 +19,7 @@ export default function PrivacyPolicyPage() {
         <Card>
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Introduction</h2>
           <p className="text-gray-700 mb-4">
-            At bit_exchange ("we," "our," or "us"), we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our cryptocurrency exchange platform.
+            At bit_exchange (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;), we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our cryptocurrency exchange platform.
           </p>
           <p className="text-gray-700">
             By using our services, you agree to the collection and use of information in accordance with this policy. If you do not agree with our policies and practices, please do not use our services.
@@ -122,7 +122,7 @@ export default function PrivacyPolicyPage() {
             <li><strong>Objection:</strong> Object to certain types of processing</li>
           </ul>
           <p className="text-gray-700">
-            To exercise these rights, please contact us using the information provided in the "Contact Us" section below.
+            To exercise these rights, please contact us using the information provided in the &quot;Contact Us&quot; section below.
           </p>
         </Card>
 
@@ -170,7 +170,7 @@ export default function PrivacyPolicyPage() {
 
         {/* Children's Privacy */}
         <Card>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Children's Privacy</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Children&apos;s Privacy</h2>
           <p className="text-gray-700">
             Our services are not intended for individuals under the age of 18. We do not knowingly collect personal information from children under 18. If we become aware that we have collected personal information from a child under 18, we will take steps to delete such information.
           </p>

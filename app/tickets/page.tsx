@@ -544,21 +544,21 @@ export default function TicketsPage() {
           <Table
             headers={['ID', 'Subject', 'User', 'Category', 'Priority', 'Status', 'Assigned To', 'Created', 'Actions']}
             data={filteredTickets.map(ticket => [
-              <span className="font-mono text-sm">{ticket.id}</span>,
-              <div>
+              <span key={`id-${ticket.id}`} className="font-mono text-sm">{ticket.id}</span>,
+              <div key={`subject-${ticket.id}`}>
                 <div className="font-medium text-muted-gray-900">{ticket.subject}</div>
                 <div className="text-sm text-muted-gray-500 truncate max-w-xs">{ticket.description}</div>
               </div>,
-              <div>
+              <div key={`user-${ticket.id}`}>
                 <div className="font-medium text-muted-gray-900">{ticket.userName}</div>
                 <div className="text-sm text-muted-gray-500">{ticket.userEmail}</div>
               </div>,
               getCategoryBadge(ticket.category),
               getPriorityBadge(ticket.priority),
               getStatusBadge(ticket.status),
-              <span className="text-sm">{ticket.assignedToName || 'Unassigned'}</span>,
+              <span key={`assigned-${ticket.id}`} className="text-sm">{ticket.assignedToName || 'Unassigned'}</span>,
               formatDate(ticket.createdAt),
-              <div className="flex items-center space-x-2">
+              <div key={`actions-${ticket.id}`} className="flex items-center space-x-2">
                 <button
                   onClick={() => handleViewTicket(ticket)}
                   className="text-pale-blue-600 hover:text-pale-blue-800 text-sm font-medium"

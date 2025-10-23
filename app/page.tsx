@@ -73,13 +73,7 @@ export default function HomePage() {
                   Go to Dashboard
                 </Link>
               ) : (
-                <div className="flex items-center space-x-3">
-                  <Link
-                    href="/login"
-                    className="text-deep-slate-600 hover:text-royal-purple-600 font-medium transition-colors"
-                  >
-                    Sign In
-                  </Link>
+                <div className="flex items-center">
                   <Link
                     href="/login"
                     className="bg-gradient-to-r from-royal-purple-500 to-emerald-gold-500 text-white px-6 py-2 rounded-lg font-medium hover:from-royal-purple-600 hover:to-emerald-gold-600 transition-all duration-200 shadow-lg hover:shadow-xl flex items-center space-x-2"
@@ -326,7 +320,7 @@ export default function HomePage() {
                 <span className="text-xl font-bold gradient-text">bit_exchange</span>
               </div>
               <p className="text-gray-300 mb-4">
-                The world's most advanced cryptocurrency exchange platform.
+                The world&apos;s most advanced cryptocurrency exchange platform.
               </p>
             </div>
             

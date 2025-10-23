@@ -447,7 +447,7 @@ export default function SocialTradingPage() {
               <Table
                 headers={['Trader', 'Status', 'Risk Level', 'Followers', 'Win Rate', 'Total Profit', 'Monthly Profit', 'Verified', 'Actions']}
                 data={filteredTraders.map(trader => [
-                  <div className="flex items-center space-x-3">
+                  <div key={trader.id} className="flex items-center space-x-3">
                     <div className="w-8 h-8 bg-gradient-to-r from-pale-blue-500 to-pale-teal-500 rounded-full flex items-center justify-center">
                       <span className="text-white text-sm font-medium">
                         {trader.name.substring(0, 2).toUpperCase()}
@@ -460,16 +460,16 @@ export default function SocialTradingPage() {
                   </div>,
                   getStatusBadge(trader.status),
                   getRiskBadge(trader.riskLevel),
-                  <span className="font-medium">{trader.followers.toLocaleString()}</span>,
-                  <span className="font-medium text-green-600">{trader.winRate}%</span>,
-                  <span className="font-medium">${trader.totalProfit.toLocaleString()}</span>,
-                  <span className="font-medium">${trader.monthlyProfit.toLocaleString()}</span>,
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                  <span key={`followers-${trader.id}`} className="font-medium">{trader.followers.toLocaleString()}</span>,
+                  <span key={`winrate-${trader.id}`} className="font-medium text-green-600">{trader.winRate}%</span>,
+                  <span key={`totalprofit-${trader.id}`} className="font-medium">${trader.totalProfit.toLocaleString()}</span>,
+                  <span key={`monthlyprofit-${trader.id}`} className="font-medium">${trader.monthlyProfit.toLocaleString()}</span>,
+                  <span key={`verified-${trader.id}`} className={`px-2 py-1 rounded-full text-xs font-medium ${
                     trader.verified ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
                   }`}>
                     {trader.verified ? '✓ Verified' : 'Unverified'}
                   </span>,
-                  <div className="flex items-center space-x-2">
+                  <div key={`actions-${trader.id}`} className="flex items-center space-x-2">
                     <button className="text-pale-blue-600 hover:text-pale-blue-800 text-sm font-medium">
                       View
                     </button>
@@ -490,14 +490,14 @@ export default function SocialTradingPage() {
               headers={['Trader', 'Symbol', 'Type', 'Amount', 'Price', 'Profit', 'Followers', 'Time']}
               data={trades.map(trade => [
                 trade.traderName,
-                <span className="font-medium">{trade.symbol}</span>,
+                <span key={`symbol-${trade.id}`} className="font-medium">{trade.symbol}</span>,
                 getTradeTypeBadge(trade.type),
-                <span className="font-medium">{trade.amount}</span>,
-                <span className="font-medium">${trade.price.toLocaleString()}</span>,
-                <span className={`font-medium ${trade.profit >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                <span key={`amount-${trade.id}`} className="font-medium">{trade.amount}</span>,
+                <span key={`price-${trade.id}`} className="font-medium">${trade.price.toLocaleString()}</span>,
+                <span key={`profit-${trade.id}`} className={`font-medium ${trade.profit >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                   ${trade.profit.toLocaleString()}
                 </span>,
-                <span className="font-medium">{trade.followers}</span>,
+                <span key={`followers-${trade.id}`} className="font-medium">{trade.followers}</span>,
                 formatDate(trade.timestamp)
               ])}
             />
@@ -512,8 +512,8 @@ export default function SocialTradingPage() {
               data={copyTrades.map(copyTrade => [
                 copyTrade.followerName,
                 copyTrade.traderName,
-                <span className="font-medium">${copyTrade.amount.toLocaleString()}</span>,
-                <span className={`font-medium ${copyTrade.profit >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                <span key={`amount-${copyTrade.id}`} className="font-medium">${copyTrade.amount.toLocaleString()}</span>,
+                <span key={`profit-${copyTrade.id}`} className={`font-medium ${copyTrade.profit >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                   ${copyTrade.profit.toLocaleString()}
                 </span>,
                 getCopyTradeStatusBadge(copyTrade.status),

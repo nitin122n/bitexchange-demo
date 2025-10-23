@@ -377,7 +377,7 @@ export default function IBSectionPage() {
               <Table
                 headers={['Partner', 'Company', 'Status', 'Tier', 'Commission Rate', 'Clients', 'Volume', 'Actions']}
                 data={filteredPartners.map(partner => [
-                  <div className="flex items-center space-x-3">
+                  <div key={partner.id} className="flex items-center space-x-3">
                     <div className="w-8 h-8 bg-gradient-to-r from-pale-blue-500 to-pale-teal-500 rounded-full flex items-center justify-center">
                       <span className="text-white text-sm font-medium">
                         {partner.name.split(' ').map(n => n[0]).join('')}
@@ -391,10 +391,10 @@ export default function IBSectionPage() {
                   partner.company,
                   getStatusBadge(partner.status),
                   getTierBadge(partner.tier),
-                  <span className="font-medium">{partner.commissionRate}%</span>,
-                  <span className="font-medium">{partner.totalClients}</span>,
-                  <span className="font-medium">${partner.totalVolume.toLocaleString()}</span>,
-                  <div className="flex items-center space-x-2">
+                  <span key={`commission-${partner.id}`} className="font-medium">{partner.commissionRate}%</span>,
+                  <span key={`clients-${partner.id}`} className="font-medium">{partner.totalClients}</span>,
+                  <span key={`volume-${partner.id}`} className="font-medium">${partner.totalVolume.toLocaleString()}</span>,
+                  <div key={`actions-${partner.id}`} className="flex items-center space-x-2">
                     <button
                       onClick={() => handleViewPartner(partner)}
                       className="text-pale-blue-600 hover:text-pale-blue-800 text-sm font-medium"
@@ -425,10 +425,10 @@ export default function IBSectionPage() {
               data={commissions.map(commission => [
                 commission.ibName,
                 commission.clientName,
-                <span className="font-medium">{commission.transactionType}</span>,
-                <span className="font-medium">${commission.amount.toLocaleString()}</span>,
-                <span className="font-medium">{commission.commissionRate}%</span>,
-                <span className="font-medium text-green-600">${commission.commissionAmount.toFixed(2)}</span>,
+                <span key={`type-${commission.id}`} className="font-medium">{commission.transactionType}</span>,
+                <span key={`amount-${commission.id}`} className="font-medium">${commission.amount.toLocaleString()}</span>,
+                <span key={`rate-${commission.id}`} className="font-medium">{commission.commissionRate}%</span>,
+                <span key={`commission-${commission.id}`} className="font-medium text-green-600">${commission.commissionAmount.toFixed(2)}</span>,
                 commission.date,
                 getCommissionStatusBadge(commission.status)
               ])}

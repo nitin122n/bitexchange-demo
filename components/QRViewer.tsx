@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface QRViewerProps {
   qrCode: string;
@@ -35,9 +36,11 @@ export default function QRViewer({
         {/* QR Code */}
         <div className="flex justify-center">
           <div className="bg-white p-4 rounded-lg border-2 border-gray-200">
-            <img 
+            <Image 
               src={qrCode} 
               alt="QR Code for wallet address" 
+              width={192}
+              height={192}
               className="w-48 h-48"
             />
           </div>

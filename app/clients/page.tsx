@@ -257,7 +257,7 @@ export default function ClientsPage() {
           <Table
             headers={['Name', 'Email', 'Status', 'Account Type', 'Balance', 'Country', 'Actions']}
             data={filteredClients.map(client => [
-              <div className="flex items-center space-x-3">
+              <div key={client.id} className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-gradient-to-r from-pale-blue-500 to-pale-teal-500 rounded-full flex items-center justify-center">
                   <span className="text-white text-sm font-medium">
                     {client.name.split(' ').map(n => n[0]).join('')}
@@ -271,9 +271,9 @@ export default function ClientsPage() {
               client.email,
               getStatusBadge(client.status),
               getAccountTypeBadge(client.accountType),
-              <span className="font-medium">${client.balance.toLocaleString()}</span>,
+              <span key={`balance-${client.id}`} className="font-medium">${client.balance.toLocaleString()}</span>,
               client.country,
-              <div className="flex items-center space-x-2">
+              <div key={`actions-${client.id}`} className="flex items-center space-x-2">
                 <button
                   onClick={() => handleViewClient(client)}
                   className="text-pale-blue-600 hover:text-pale-blue-800 text-sm font-medium"

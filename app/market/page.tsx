@@ -180,7 +180,32 @@ export default function MarketPage() {
 
   return (
     <Layout>
-      <div className="space-y-6">
+      <div className="space-y-6 relative">
+        {/* Crypto Background Elements */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+          {/* Floating Crypto Symbols */}
+          <div className="absolute top-20 left-10 text-royal-purple-200/30 text-6xl animate-pulse">₿</div>
+          <div className="absolute top-40 right-20 text-emerald-gold-200/30 text-5xl animate-bounce">Ξ</div>
+          <div className="absolute top-60 left-1/4 text-luxury-gold-200/30 text-4xl animate-pulse">₮</div>
+          <div className="absolute top-80 right-1/3 text-royal-purple-200/30 text-5xl animate-bounce">₳</div>
+          <div className="absolute top-32 left-1/2 text-emerald-gold-200/30 text-4xl animate-pulse">◊</div>
+          
+          {/* Animated Grid Pattern */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="grid grid-cols-12 gap-4 h-full">
+              {Array.from({ length: 144 }).map((_, i) => (
+                <div key={i} className="border border-royal-purple-300/20 rounded animate-pulse" style={{ animationDelay: `${i * 0.1}s` }}></div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Floating Particles */}
+          <div className="absolute top-1/4 left-1/3 w-2 h-2 bg-royal-purple-400/40 rounded-full animate-ping"></div>
+          <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-emerald-gold-400/40 rounded-full animate-ping" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-1/2 left-1/5 w-1 h-1 bg-luxury-gold-400/40 rounded-full animate-ping" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-2/3 right-1/3 w-2 h-2 bg-royal-purple-400/40 rounded-full animate-ping" style={{ animationDelay: '0.5s' }}></div>
+          <div className="absolute top-3/4 left-2/3 w-1 h-1 bg-emerald-gold-400/40 rounded-full animate-ping" style={{ animationDelay: '1.5s' }}></div>
+        </div>
         {/* Page Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">

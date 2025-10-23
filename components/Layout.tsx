@@ -20,7 +20,7 @@ export default function Layout({ children }: LayoutProps) {
       try {
         const token = localStorage.getItem('token');
         if (!token) {
-          router.push('/login');
+          router.push('/');
           return;
         }
 
@@ -32,7 +32,7 @@ export default function Layout({ children }: LayoutProps) {
 
         if (!response.ok) {
           localStorage.removeItem('token');
-          router.push('/login');
+          router.push('/');
           return;
         }
 
@@ -41,7 +41,7 @@ export default function Layout({ children }: LayoutProps) {
       } catch (error) {
         console.error('Auth check failed:', error);
         localStorage.removeItem('token');
-        router.push('/login');
+        router.push('/');
       } finally {
         setIsLoading(false);
       }
@@ -52,7 +52,7 @@ export default function Layout({ children }: LayoutProps) {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    router.push('/login');
+    router.push('/');
   };
 
   if (isLoading) {

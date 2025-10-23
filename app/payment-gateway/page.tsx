@@ -163,7 +163,7 @@ export default function PaymentGatewayPage() {
                 <h3 className="text-sm font-medium text-blue-800 mb-2">How it works:</h3>
                 <ol className="text-xs text-blue-700 space-y-1 list-decimal list-inside">
                   <li>Enter the deposit amount and user email</li>
-                  <li>Click "Generate Wallet/QR" to create a unique TRC20 address</li>
+                  <li>Click &quot;Generate Wallet/QR&quot; to create a unique TRC20 address</li>
                   <li>A QR code will be generated for easy scanning</li>
                   <li>The deposit will be tracked in the system</li>
                   <li>User can send TRC20 tokens to the generated address</li>

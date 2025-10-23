@@ -439,21 +439,21 @@ export default function TransactionsPage() {
           <Table
             headers={['ID', 'User', 'Type', 'Method', 'Amount', 'Status', 'Fee', 'Date', 'Actions']}
             data={filteredTransactions.map(transaction => [
-              <span className="font-mono text-sm">{transaction.id}</span>,
-              <div>
+              <span key={`id-${transaction.id}`} className="font-mono text-sm">{transaction.id}</span>,
+              <div key={`user-${transaction.id}`}>
                 <div className="font-medium text-muted-gray-900">{transaction.userName}</div>
                 <div className="text-sm text-muted-gray-500">{transaction.userEmail}</div>
               </div>,
               getTypeBadge(transaction.type),
               getMethodBadge(transaction.method),
-              <div>
+              <div key={`amount-${transaction.id}`}>
                 <div className="font-medium">{transaction.amount.toLocaleString()} {transaction.currency}</div>
                 <div className="text-sm text-gray-500">Net: {transaction.netAmount.toLocaleString()}</div>
               </div>,
               getStatusBadge(transaction.status),
-              <span className="font-medium">{transaction.fee.toLocaleString()}</span>,
+              <span key={`fee-${transaction.id}`} className="font-medium">{transaction.fee.toLocaleString()}</span>,
               formatDate(transaction.createdAt),
-              <div className="flex items-center space-x-2">
+              <div key={`actions-${transaction.id}`} className="flex items-center space-x-2">
                 <button
                   onClick={() => handleViewTransaction(transaction)}
                   className="text-pale-blue-600 hover:text-pale-blue-800 text-sm font-medium"

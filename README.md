@@ -334,3 +334,4 @@ This project is for demonstration purposes. Please ensure proper licensing for p
 
 **Note**: This is a demo application. For production use, implement proper security measures, real blockchain integration, and comprehensive testing.
 # bit-demo
+# bitexchange-demo

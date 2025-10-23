@@ -50,11 +50,11 @@ export async function POST(request: NextRequest) {
       }
     };
 
-    // Check if it's a demo credential
+    // Check if it's a demo credential - Simple password check for Vercel
     const demoUser = demoCredentials[email.toLowerCase()];
     if (demoUser) {
-      const isPasswordValid = await verifyPassword(password, demoUser.passwordHash);
-      if (isPasswordValid) {
+      // Simple password check for demo users (bypass bcrypt for Vercel)
+      if (password === 'admin123') {
         const token = generateToken({
           id: demoUser.id,
           email: demoUser.email,
@@ -72,6 +72,11 @@ export async function POST(request: NextRequest) {
             name: demoUser.name,
           },
         });
+      } else {
+        return NextResponse.json(
+          { error: 'Invalid password. Use: admin123' },
+          { status: 401 }
+        );
       }
     }
 

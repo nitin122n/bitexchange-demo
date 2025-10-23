@@ -357,6 +357,7 @@ export default function HomePage() {
           
           <div className="border-t border-deep-slate-700 mt-8 pt-8 text-center text-gray-300">
             <p>&copy; 2024 bit_exchange. All rights reserved.</p>
+            {/* Force deployment update */}
           </div>
         </div>
       </footer>

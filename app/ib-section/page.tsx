@@ -40,10 +40,11 @@ export default function IBSectionPage() {
   const [ibPartners, setIbPartners] = useState<IBPartner[]>([]);
   const [commissions, setCommissions] = useState<IBCommission[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'partners' | 'commissions' | 'analytics'>('partners');
+  const [activeTab, setActiveTab] = useState<'overview' | 'partners' | 'commissions' | 'analytics' | 'integration'>('overview');
   const [selectedPartner, setSelectedPartner] = useState<IBPartner | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [showInfo, setShowInfo] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -333,9 +334,11 @@ export default function IBSectionPage() {
           <div className="border-b border-gray-200">
             <nav className="-mb-px flex space-x-8">
               {[
+                { id: 'overview', name: 'Overview', icon: '📋' },
                 { id: 'partners', name: 'IB Partners', icon: '👥' },
                 { id: 'commissions', name: 'Commissions', icon: '💰' },
-                { id: 'analytics', name: 'Analytics', icon: '📊' }
+                { id: 'analytics', name: 'Analytics', icon: '📊' },
+                { id: 'integration', name: 'MT5 Integration', icon: '🔌' }
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -353,6 +356,115 @@ export default function IBSectionPage() {
             </nav>
           </div>
         </Card>
+
+        {/* Overview Tab */}
+        {activeTab === 'overview' && (
+          <div className="space-y-6">
+            <Card>
+              <div className="space-y-6">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">1. IB (Introducing Broker) Section</h2>
+                  <p className="text-lg text-gray-700 mb-6">
+                    An IB is someone who refers clients to your trading platform and earns commissions based on their trading activity.
+                  </p>
+                  
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Key Features</h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-pale-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <strong className="text-gray-900">IB Registration:</strong>
+                        <span className="text-gray-700 ml-2">IB can sign up and get a unique referral code/link.</span>
+                      </div>
+                    </li>
+                    <li className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-pale-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <strong className="text-gray-900">Client Tracking:</strong>
+                        <span className="text-gray-700 ml-2">Each client introduced by an IB is linked to their account.</span>
+                      </div>
+                    </li>
+                    <li className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-pale-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <strong className="text-gray-900">Commission Tracking:</strong>
+                        <span className="text-gray-700 ml-2">Automatically calculate IB commissions based on trades or deposits.</span>
+                      </div>
+                    </li>
+                    <li className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-pale-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <strong className="text-gray-900">Performance Dashboard:</strong>
+                        <span className="text-gray-700 ml-2">Show IBs their clients, total trades, total commission earned, and active/dormant clients.</span>
+                      </div>
+                    </li>
+                    <li className="flex items-start space-x-3">
+                      <div className="w-6 h-6 bg-pale-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <strong className="text-gray-900">Payout Management:</strong>
+                        <span className="text-gray-700 ml-2">Generate payout reports and process IB payments.</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </Card>
+
+            {/* How to Get Started */}
+            <Card>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Getting Started as an IB Partner</h3>
+              <div className="space-y-4">
+                <div className="flex items-start space-x-3 p-4 bg-gray-50 rounded-lg">
+                  <div className="w-8 h-8 bg-gradient-to-r from-pale-blue-500 to-pale-teal-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white font-bold">1</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Register Your Interest</h4>
+                    <p className="text-gray-600">Contact our partnership team to express interest in becoming an IB partner.</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3 p-4 bg-gray-50 rounded-lg">
+                  <div className="w-8 h-8 bg-gradient-to-r from-pale-blue-500 to-pale-teal-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white font-bold">2</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Get Verified</h4>
+                    <p className="text-gray-600">Complete the verification process and receive your unique referral link.</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3 p-4 bg-gray-50 rounded-lg">
+                  <div className="w-8 h-8 bg-gradient-to-r from-pale-blue-500 to-pale-teal-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white font-bold">3</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Start Referring</h4>
+                    <p className="text-gray-600">Share your referral link and start earning commissions from client trading activity.</p>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+        )}
 
         {/* IB Partners Tab */}
         {activeTab === 'partners' && (
@@ -464,6 +576,170 @@ export default function IBSectionPage() {
                   <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <p className="text-gray-500">Chart visualization would go here</p>
+              </div>
+            </Card>
+          </div>
+        )}
+
+        {/* MT5 Integration Tab */}
+        {activeTab === 'integration' && (
+          <div className="space-y-6">
+            <Card>
+              <div className="space-y-6">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">MT5 Integration Options</h2>
+                  <p className="text-lg text-gray-700 mb-6">
+                    MT5 provides several ways to access its data. Choose the integration method that best fits your requirements.
+                  </p>
+                  
+                  {/* MT5 Manager API */}
+                  <div className="border border-gray-200 rounded-lg p-6 mb-6">
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                        <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-semibold text-gray-900">A. MT5 Manager API</h3>
+                        <p className="text-gray-600">Official API for brokers</p>
+                      </div>
+                    </div>
+                    <ul className="space-y-2 ml-16">
+                      <li className="flex items-start space-x-2">
+                        <svg className="w-5 h-5 text-green-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-gray-700">Accessing accounts, trades, balances, positions</span>
+                      </li>
+                      <li className="flex items-start space-x-2">
+                        <svg className="w-5 h-5 text-green-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-gray-700">Managing IB commissions</span>
+                      </li>
+                      <li className="flex items-start space-x-2">
+                        <svg className="w-5 h-5 text-green-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-gray-700">Generating reports</span>
+                      </li>
+                    </ul>
+                    <div className="mt-4 ml-16">
+                      <span className="inline-block bg-yellow-100 text-yellow-800 text-xs font-medium px-3 py-1 rounded-full">
+                        Usually requires broker permissions or a licensed MT5 server
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* MT5 Gateway / Trade Server API */}
+                  <div className="border border-gray-200 rounded-lg p-6 mb-6">
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                        <svg className="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-semibold text-gray-900">B. MT5 Gateway / Trade Server API</h3>
+                        <p className="text-gray-600">Connects external apps to MT5 trade server</p>
+                      </div>
+                    </div>
+                    <ul className="space-y-2 ml-16">
+                      <li className="flex items-start space-x-2">
+                        <svg className="w-5 h-5 text-green-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-gray-700">Executing trades</span>
+                      </li>
+                      <li className="flex items-start space-x-2">
+                        <svg className="w-5 h-5 text-green-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-gray-700">Fetching account data</span>
+                      </li>
+                      <li className="flex items-start space-x-2">
+                        <svg className="w-5 h-5 text-green-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-gray-700">Monitoring real-time positions</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* MetaTrader Web API / REST API */}
+                  <div className="border border-gray-200 rounded-lg p-6 mb-6">
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                        <svg className="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.1-.5.14-.882.343-1.182.525A35.92 35.92 0 008.636 7.6c.266.506.46 1.004.575 1.494.143.596.17 1.127.136 1.6h4.936c-.033-.473-.006-1.004.137-1.6.115-.49.31-.988.576-1.494.348-.706.728-1.268 1.182-1.875a5.78 5.78 0 00-1.647-.425C10.232 4.032 10.076 4 10 4zM2 10a8 8 0 1016 0 8 8 0 00-16 0zm6-.5a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-semibold text-gray-900">C. MetaTrader Web API / REST API</h3>
+                        <p className="text-gray-600">Modern web-friendly API for MT5 integration</p>
+                      </div>
+                    </div>
+                    <ul className="space-y-2 ml-16">
+                      <li className="flex items-start space-x-2">
+                        <svg className="w-5 h-5 text-green-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-gray-700">Some brokers expose REST or WebSocket APIs for MT5</span>
+                      </li>
+                      <li className="flex items-start space-x-2">
+                        <svg className="w-5 h-5 text-green-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-gray-700">Easier for modern web apps and CRM integration</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* MT5 Python / MQL5 Scripts */}
+                  <div className="border border-gray-200 rounded-lg p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
+                        <svg className="w-6 h-6 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-semibold text-gray-900">D. MT5 Python / MQL5 Scripts</h3>
+                        <p className="text-gray-600">Automated data collection via scripts</p>
+                      </div>
+                    </div>
+                    <ul className="space-y-2 ml-16">
+                      <li className="flex items-start space-x-2">
+                        <svg className="w-5 h-5 text-green-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-gray-700">Use MQL5 scripts to push trade data from MT5 to your CRM</span>
+                      </li>
+                      <li className="flex items-start space-x-2">
+                        <svg className="w-5 h-5 text-green-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-gray-700">Python integration can pull trade reports and account details</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </Card>
+
+            {/* Integration Recommendation */}
+            <Card>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Recommended Integration Approach</h3>
+              <div className="space-y-4">
+                <div className="p-4 bg-blue-50 border-l-4 border-blue-500 rounded">
+                  <h4 className="font-semibold text-gray-900 mb-2">For Most Use Cases:</h4>
+                  <p className="text-gray-700">
+                    We recommend starting with <strong>MetaTrader Web API / REST API</strong> as it's the most accessible and 
+                    suitable for web-based applications. If broker support is limited, consider <strong>MT5 Python / MQL5 Scripts</strong> 
+                    for automated data collection.
+                  </p>
+                </div>
               </div>
             </Card>
           </div>

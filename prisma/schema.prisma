@@ -50,6 +50,68 @@ model Deposit {
   @@map("deposits")
 }
 
+model IB {
+  id              String   @id @default(cuid())
+  name            String
+  email           String   @unique
+  password        String
+  referralCode    String   @unique
+  referralLink    String
+  contactDetails  String?
+  clients         Client[]
+  commissions     Commission[]
+  payouts         Payout[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("ibs")
+}
+
+model Client {
+  id          String      @id @default(cuid())
+  name        String
+  email       String      @unique
+  status      String      @default("active") // "active" or "dormant"
+  trades      Int         @default(0)
+  deposits    Float       @default(0)
+  ibId        String
+  ib          IB          @relation(fields: [ibId], references: [id], onDelete: Cascade)
+  commissions Commission[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@map("clients")
+}
+
+model Commission {
+  id          String   @id @default(cuid())
+  ibId        String
+  clientId    String
+  amount      Float
+  type        String   // "trade" or "deposit"
+  description String?
+  ib          IB       @relation(fields: [ibId], references: [id], onDelete: Cascade)
+  client      Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+
+  @@map("commissions")
+}
+
+model Payout {
+  id          String   @id @default(cuid())
+  ibId        String
+  amount      Float
+  status      String   @default("Pending") // "Pending", "Paid", "Rejected"
+  requestedAt DateTime @default(now())
+  processedAt DateTime?
+  notes       String?
+  ib          IB       @relation(fields: [ibId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("payouts")
+}
+
 // Note: SQLite doesn't support enums, using strings instead
 // Valid roles: "SUPER_ADMIN", "ADMIN", "CO_ADMIN"
 // Valid statuses: "PENDING", "APPROVED", "REJECTED", "COMPLETED"

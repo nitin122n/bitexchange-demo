@@ -14,6 +14,7 @@ interface NavItem {
   href: string;
   icon: React.ReactNode;
   hasDropdown?: boolean;
+  subItems?: { name: string; href: string }[];
 }
 
 const navigationItems: NavItem[] = [
@@ -55,13 +56,20 @@ const navigationItems: NavItem[] = [
   },
   {
     name: 'IB Section',
-    href: '/ib-section',
+    href: '/dashboard/ib',
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
         <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
       </svg>
     ),
     hasDropdown: true,
+    subItems: [
+      { name: 'IB Registration', href: '/dashboard/ib/registration' },
+      { name: 'Client Tracking', href: '/dashboard/ib/clients' },
+      { name: 'Commission Tracking', href: '/dashboard/ib/commissions' },
+      { name: 'Performance Dashboard', href: '/dashboard/ib/dashboard' },
+      { name: 'Payout Management', href: '/dashboard/ib/payouts' },
+    ],
   },
   {
     name: 'Social Trading',
@@ -115,6 +123,14 @@ const navigationItems: NavItem[] = [
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
+  const [openDropdowns, setOpenDropdowns] = useState<Record<string, boolean>>({});
+
+  const toggleDropdown = (itemName: string) => {
+    setOpenDropdowns(prev => ({
+      ...prev,
+      [itemName]: !prev[itemName]
+    }));
+  };
 
   return (
     <>
@@ -128,7 +144,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
       {/* Sidebar */}
       <div className={`
-        fixed top-0 left-0 h-full w-64 bg-white border-r border-gray-200 z-50 transform transition-transform duration-300 ease-in-out
+        fixed top-0 left-0 h-full w-64 bg-white border-r border-gray-200 z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         lg:translate-x-0 lg:static lg:inset-0
       `}>
@@ -161,33 +177,73 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         <nav className="mt-6 px-4">
           <ul className="space-y-2">
             {navigationItems.map((item) => {
-              const isActive = pathname === item.href;
+              const isActive = pathname === item.href || (item.subItems && item.subItems.some(sub => pathname === sub.href));
+              const isDropdownOpen = openDropdowns[item.name] || isActive;
               
               return (
                 <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className={`
-                      sidebar-item flex items-center justify-between
-                      ${isActive ? 'active' : ''}
-                    `}
-                    onClick={() => {
-                      // Close sidebar on mobile when navigating
-                      if (window.innerWidth < 1024) {
-                        onClose();
-                      }
-                    }}
-                  >
-                    <div className="flex items-center space-x-3">
-                      {item.icon}
-                      <span className="font-medium">{item.name}</span>
-                    </div>
-                    {item.hasDropdown && (
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                      </svg>
+                  <div>
+                    <Link
+                      href={item.href}
+                      className={`
+                        sidebar-item flex items-center justify-between
+                        ${isActive ? 'active' : ''}
+                      `}
+                      onClick={(e) => {
+                        if (item.hasDropdown && item.subItems) {
+                          e.preventDefault();
+                          toggleDropdown(item.name);
+                        } else {
+                          // Close sidebar on mobile when navigating
+                          if (window.innerWidth < 1024) {
+                            onClose();
+                          }
+                        }
+                      }}
+                    >
+                      <div className="flex items-center space-x-3">
+                        {item.icon}
+                        <span className="font-medium">{item.name}</span>
+                      </div>
+                      {item.hasDropdown && (
+                        <svg 
+                          className={`w-4 h-4 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`}
+                          fill="currentColor" 
+                          viewBox="0 0 20 20"
+                        >
+                          <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                      )}
+                    </Link>
+                    
+                    {/* Submenu */}
+                    {item.hasDropdown && item.subItems && isDropdownOpen && (
+                      <ul className="mt-1 ml-8 space-y-1">
+                        {item.subItems.map((subItem) => {
+                          const isSubActive = pathname === subItem.href;
+                          return (
+                            <li key={subItem.name}>
+                              <Link
+                                href={subItem.href}
+                                className={`
+                                  sidebar-item flex items-center px-4 py-2 text-sm
+                                  ${isSubActive ? 'active' : 'opacity-75'}
+                                `}
+                                onClick={() => {
+                                  // Close sidebar on mobile when navigating
+                                  if (window.innerWidth < 1024) {
+                                    onClose();
+                                  }
+                                }}
+                              >
+                                <span className="font-medium">{subItem.name}</span>
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
                     )}
-                  </Link>
+                  </div>
                 </li>
               );
             })}
